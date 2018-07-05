@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="971px" height="971px" viewBox="0 0 971 971" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>checkbox</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="checkbox">
+            <rect id="box" fill="#00D4BE" x="0" y="0" width="971" height="971" rx="100"></rect>
+            <path id="check" fill="#00544C" fill-rule="nonzero" d="M403.898,669.404 L237.498,503.004 C227.501,493.007 227.501,476.798 237.498,466.8 L273.701,430.596 C283.698,420.598 299.908,420.598 309.905,430.596 L422,542.69 L662.095,302.596 C672.092,292.599 688.302,292.599 698.299,302.596 L734.502,338.8 C744.499,348.797 744.499,365.006 734.502,375.004 L440.102,669.405 C430.104,679.402 413.895,679.402 403.898,669.404 Z"></path>
+        </g>
+    </g>
+</svg>
