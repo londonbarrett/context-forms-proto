@@ -3,24 +3,25 @@ import styled from 'styled-components';
 import { formInput } from './Forms';
 import CheckboxIcon from './CheckboxIcon';
 
+const Container = styled.div`
+  display: flex;
+`;
+
 const Label = styled.label`
-  height: 30px;
   line-height: 30px;
-  vertical-align: top;
-`
+  padding-left: .5rem;
+`;
 
 class CheckboxInput extends React.Component {
-  state = {checked: false}
-  onClick = (event) => {
-    console.log('holi', this.state);
-    const {onInput} = this.props;
-    const {checked} = this.state;
-    this.setState({checked: !checked})
+  state = { checked: false };
 
-    if (onInput) {
-      onInput({value: checked});
-    }
+  onClick = () => {
+    const { update } = this.props;
+    const { checked } = this.state;
+    this.setState({ checked: !checked });
+    update(!checked);
   }
+
   render() {
     const {
       label,
@@ -28,12 +29,13 @@ class CheckboxInput extends React.Component {
       hasErrors,
       isDirt,
       name,
-      validators
+      validators,
     } = this.props;
-    const {checked} = this.state;
+    const { checked } = this.state;
     return (
-      <Label htmlFor={id}>
+      <Container>
         <input
+          id={id}
           type="hidden"
           name={name}
           onInput={this.onInput}
@@ -41,15 +43,15 @@ class CheckboxInput extends React.Component {
         />
         <CheckboxIcon
           checked={checked}
-          height="30"
+          height={30}
           onClick={this.onClick}
         />
-        <span>{label}</span>
-      </Label>
+        <Label htmlFor={id}>
+          {label}
+        </Label>
+      </Container>
     );
   }
 }
 
-export default formInput({
-  valueProp: 'checked'
-})(CheckboxInput);
+export default formInput(CheckboxInput);

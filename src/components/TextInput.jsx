@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { formInput } from './Forms';
 
 const Input = styled.input`
-  background: ${props => props.hasErrors ? '#FF544C' : '#FFF'}
+  background: ${({ hasErrors }) => (hasErrors ? '#FF544C' : '#FFF')}
   border: none;
   border-radius: 1rem;
-  color: ${props => props.hasErrors ? '#FFF' : '#007367'}
+  color: ${({ hasErrors }) => (hasErrors ? '#FFF' : '#007367')}
   font-size: 1rem;
   line-height: 2rem;
   padding: .5rem 1rem;
@@ -15,16 +15,17 @@ const Input = styled.input`
 
 class TextInput extends React.Component {
   onInput = (event) => {
-    const {onInput} = this.props;
-    onInput(event.target.value);
+    const { update } = this.props;
+    update(event.target.value);
   }
+
   render() {
     const {
       id,
       hasErrors,
       isDirt,
       name,
-      validators
+      validators,
     } = this.props;
     return (
       <Input
@@ -36,10 +37,8 @@ class TextInput extends React.Component {
         onInput={this.onInput}
         validators={validators}
       />
-    )
+    );
   }
 }
 
-export default formInput({
-  valueProp: 'value'
-})(TextInput);
+export default formInput(TextInput);

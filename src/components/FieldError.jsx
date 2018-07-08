@@ -15,14 +15,18 @@ const ListItem = styled.li`
 
 const FieldError = ({ name, errors }) => {
   if (errors) {
-    const items = errors.map(error =>
-      <ListItem key={error}>{error}</ListItem>
-    )
+    const items = errors.map(error => (
+      <ListItem key={error}>
+        {error}
+      </ListItem>
+    ));
     return (
-      <List>{items}</List>
+      <List>
+        {items}
+      </List>
     );
   }
   return null;
-}
+};
 
 export default withFormContext(FieldError);
