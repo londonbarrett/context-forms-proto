@@ -1,39 +1,33 @@
 import * as React from 'react';
-import { FormConsumer } from './FormContext';
+import { Consumer } from './FormContext';
 
 const formInput = Component => class FormInput extends React.Component {
   state = {};
 
-  update = context => (value) => {
-    console.log(value);
-    const meta = context.setValue(
-      this,
-      value,
-    );
-    this.setState(meta);
-  }
+  setValue = context => value => context.setValue(this, value);
 
   render() {
-    const { id, name, label } = this.props;
+    const { id, name } = this.props;
     const { hasErrors, isDirt } = this.state;
     return (
-      <FormConsumer>
+      <Consumer>
         { (context) => {
-          context.register(this);
+          context.registerInput(this);
           return (
             <Component
               id={id}
               name={name}
-              label={label}
-              update={this.update(context)}
+              setValue={this.setValue(context)}
               formErrors={context.errors}
               formValues={context.values}
               isDirt={isDirt}
               hasErrors={hasErrors}
+              {...this.props}
             />
           );
-        }}
-      </FormConsumer>
+        }
+      }
+      </Consumer>
     );
   }
 };

@@ -4,6 +4,6 @@ export const lowerThan = limit => message => value => (value < limit ? message :
 
 export const greaterThan = limit => message => value => (value > limit ? message : false);
 
-export const isNotEmpty = message => value => (value.length <= 0 ? message : false);
+export const isNotEmpty = message => value => (!value || value.length <= 0 ? message : false);
 
 export const isRequired = message => value => (value === undefined ? message : false);

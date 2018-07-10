@@ -15,8 +15,8 @@ const Input = styled.input`
 
 class TextInput extends React.Component {
   onInput = (event) => {
-    const { update } = this.props;
-    update(event.target.value);
+    const { setValue } = this.props;
+    setValue(event.target.value);
   }
 
   render() {
@@ -24,6 +24,7 @@ class TextInput extends React.Component {
       id,
       hasErrors,
       isDirt,
+      label,
       name,
       validators,
     } = this.props;

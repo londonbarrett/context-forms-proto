@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { withFormContext } from './Forms';
 
@@ -13,7 +14,7 @@ const ListItem = styled.li`
   font-size: .7rem;
 `;
 
-const FieldError = ({ name, errors }) => {
+const FieldError = ({ errors }) => {
   if (errors) {
     const items = errors.map(error => (
       <ListItem key={error}>
@@ -27,6 +28,14 @@ const FieldError = ({ name, errors }) => {
     );
   }
   return null;
+};
+
+FieldError.propTypes = {
+  errors: PropTypes.arrayOf(PropTypes.string),
+};
+
+FieldError.defaultProps = {
+  errors: undefined,
 };
 
 export default withFormContext(FieldError);

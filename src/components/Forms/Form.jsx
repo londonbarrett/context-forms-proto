@@ -1,7 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Provider, FormConsumer } from './FormContext';
-// TODO: remove Form prefix from components
+import { Provider, Consumer } from './FormContext';
 
 class Form extends React.Component {
   context = {};
@@ -9,29 +8,42 @@ class Form extends React.Component {
   onSubmit = (event) => {
     event.preventDefault();
     const { onSubmit } = this.props;
-    const { errors, values } = this.context;
+    const { errors, values, validateInputs } = this.context;
+    validateInputs();
+    // TODO: check if form is valid
     if (onSubmit) {
-      onSubmit({ event, errors, values });
+      onSubmit({
+        ...event,
+        errors,
+        values,
+      });
     }
   }
 
+  onReset = () => {
+    const { resetForm } = this.context;
+    resetForm();
+  }
+
   render() {
-    const { children, className } = this.props;
+    const { children, className, name } = this.props;
     return (
       <Provider>
-        <FormConsumer>
+        <Consumer>
           { (context) => {
             this.context = context;
             return (
               <form
                 onSubmit={this.onSubmit}
+                onReset={this.onReset}
                 className={className}
+                name={name}
               >
                 {children}
               </form>
             );
           }}
-        </FormConsumer>
+        </Consumer>
       </Provider>
     );
   }
@@ -40,11 +52,13 @@ class Form extends React.Component {
 Form.propTypes = {
   children: PropTypes.arrayOf(PropTypes.element).isRequired,
   className: PropTypes.string,
+  name: PropTypes.string,
   onSubmit: PropTypes.func,
 };
 
 Form.defaultProps = {
   className: '',
+  name: undefined,
   onSubmit: undefined,
 };
 

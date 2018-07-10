@@ -6,6 +6,9 @@ import TextInput from './components/TextInput';
 import CheckboxInput from './components/CheckboxInput';
 import FieldError from './components/FieldError';
 import RatingInput from './components/RatingInput';
+import Reset from './components/Reset';
+import Submit from './components/Submit';
+import FormErrors from './components/FormErrors';
 
 const Header = styled.header`
   color: #00544C;
@@ -46,17 +49,7 @@ const Actions = Field.extend`
   text-align: right;
 `;
 
-const Submit = styled.input`
-  background: #00544C;
-  border: none;
-  border-radius: 1rem;
-  color: #FFF;
-  font-size: 1rem;
-  line-height: 2rem;
-  padding: .5rem 2rem;
-`;
-
-export const onSubmit = (data) => {
+const onSubmit = (data) => {
   console.log('submit', data.values);
 };
 
@@ -69,7 +62,10 @@ const App = () => (
       </h1>
     </Header>
     <div>
-      <StyledForm onSubmit={onSubmit}>
+      <StyledForm
+        onSubmit={onSubmit}
+        name="commentForm"
+      >
         <Field>
           <Label htmlFor="firstName">
             First Name
@@ -78,7 +74,7 @@ const App = () => (
             id="firstName"
             name="firstName"
             validators={[
-              validators.isNotEmpty('It is empty'),
+              validators.isNotEmpty('First Name should not be empty'),
             ]}
           />
           <FieldError name="firstName" />
@@ -90,11 +86,7 @@ const App = () => (
           <TextInput
             id="lastName"
             name="lastName"
-            validators={[
-              validators.isNotEmpty('It is empty'),
-            ]}
           />
-          <FieldError name="lastName" />
         </Field>
         <Field>
           <Label htmlFor="age">
@@ -104,9 +96,9 @@ const App = () => (
             id="age"
             name="age"
             validators={[
-              validators.isNotEmpty('It is empty'),
-              validators.isNumber('It is not a number'),
-              validators.greaterThan(150)('You are not that old'),
+              validators.isNotEmpty('Age should not be empty'),
+              validators.isNumber('Age should be a number'),
+              validators.greaterThan(150)('Age should be under 150'),
             ]}
           />
           <FieldError name="age" />
@@ -119,6 +111,9 @@ const App = () => (
             id="accept"
             label="Do you accept terms and contidions"
             name="accept"
+            validators={[
+              validators.isRequired('Terms & Conditions must be accepted'),
+            ]}
           />
           <FieldError name="accept" />
         </Field>
@@ -130,15 +125,14 @@ const App = () => (
             id="rating"
             name="rating"
             validators={[
-              validators.isRequired('This field is required'),
+              validators.isRequired('Rating field is required'),
             ]}
           />
-          <FieldError name="rating" />
         </Field>
-        <FieldError name="age" />
+        <FormErrors />
         <Actions>
-          <input type="reset" />
-          <Submit type="submit" value="Send" />
+          <Reset />
+          <Submit value="Send" />
         </Actions>
       </StyledForm>
     </div>

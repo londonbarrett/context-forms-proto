@@ -2,18 +2,30 @@ import * as React from 'react';
 import StarIcon from './StarIcon';
 import { formInput } from './Forms';
 
+
 class RatingInput extends React.Component {
+  input = React.createRef();
+
   state = { value: '' };
 
-  onClick = (event) => {
-    const { update } = this.props;
-    const value = event.currentTarget.getAttribute('value');
-    this.setState({ value });
-    update(value);
+  onComponentDidMount() {
+    this.input.current.addEventListener('onreset', console.log('zorra'));
   }
 
-  onchange = () => {
+  onClick = (event) => {
+    const { setValue } = this.props;
+    const value = event.currentTarget.getAttribute('value');
+    this.input.current.value = value;
+    this.setState({ value });
+    setValue(value);
+  }
+
+  onChange = () => {
     console.log('Changeeeeee');
+  }
+
+  onReset = () => {
+    console.log('estupida poney');
   }
 
   render() {
@@ -34,7 +46,16 @@ class RatingInput extends React.Component {
     return (
       <div>
         {stars}
-        <input id={id} type="hidden" name={name} value={value} onChange={this.onChange} />
+        <input
+          id={id}
+          type="hidden"
+          name={name}
+          value={value}
+          onChange={this.onChange}
+          onReset={this.onReset}
+          ref={this.input}
+          defaultValue="1"
+        />
       </div>
     );
   }

@@ -16,10 +16,10 @@ class CheckboxInput extends React.Component {
   state = { checked: false };
 
   onClick = () => {
-    const { update } = this.props;
+    const { setValue } = this.props;
     const { checked } = this.state;
     this.setState({ checked: !checked });
-    update(!checked);
+    setValue(!checked);
   }
 
   render() {
