@@ -1,11 +1,11 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import logo from './logo.svg';
-import { Form, validators } from './components/Forms';
-import TextInput from './components/TextInput';
-import CheckboxInput from './components/CheckboxInput';
+import { Form, validators } from './components/ContextForms';
+import TextfieldInput from './components/inputs/TextfieldInput';
+import CheckboxInput from './components/inputs/CheckboxInput';
 import FieldError from './components/FieldError';
-import RatingInput from './components/RatingInput';
+import RatingInput from './components/inputs/RatingInput';
 import Reset from './components/Reset';
 import Submit from './components/Submit';
 import FormErrors from './components/FormErrors';
@@ -70,12 +70,13 @@ const App = () => (
           <Label htmlFor="firstName">
             First Name
           </Label>
-          <TextInput
+          <TextfieldInput
             id="firstName"
             name="firstName"
             validators={[
               validators.isNotEmpty('First Name should not be empty'),
             ]}
+            value="Andrepota"
           />
           <FieldError name="firstName" />
         </Field>
@@ -83,7 +84,7 @@ const App = () => (
           <Label htmlFor="lastName">
             Last Name
           </Label>
-          <TextInput
+          <TextfieldInput
             id="lastName"
             name="lastName"
           />
@@ -92,7 +93,7 @@ const App = () => (
           <Label htmlFor="age">
             Age
           </Label>
-          <TextInput
+          <TextfieldInput
             id="age"
             name="age"
             validators={[
@@ -114,6 +115,7 @@ const App = () => (
             validators={[
               validators.isRequired('Terms & Conditions must be accepted'),
             ]}
+            value
           />
           <FieldError name="accept" />
         </Field>
@@ -127,6 +129,7 @@ const App = () => (
             validators={[
               validators.isRequired('Rating field is required'),
             ]}
+            value={3}
           />
         </Field>
         <FormErrors />

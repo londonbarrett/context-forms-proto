@@ -9,11 +9,11 @@ https://groundberry.github.io/development/2017/06/11/create-react-app-linting-al
   context value (DONE).
 - Create Form Actions (Submit, Reset), this could be
   included in the inputForm decorator (DONE).
-- Finish Reset Form.
-- Initialize Form.
-- Clean comps.
+- Finish Reset Form (DONE).
+- Initialize Form (DONE).
+- Clean comps (DONE).
+- Remove linting errors (DONE).
 - Move to independant library (or create lerna repo).
-- Remove linting errors.
 - setup aria on custom controls.
 - Set up preprcessors and post processoprs (for V2).
 - set up async validation (for V2).
@@ -27,4 +27,4 @@ https://groundberry.github.io/development/2017/06/11/create-react-app-linting-al
 # BUGS
 
 - Custom inputs are not setting form as invalid, something is wrong
-  setting values
+  setting values (DONE).

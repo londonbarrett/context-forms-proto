@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 
 const FormContext = React.createContext({
   errors: {},
@@ -11,6 +12,8 @@ export class Provider extends React.Component {
 
   hasErrors = false;
 
+  initialValues = {};
+
   inputs = {};
 
   isDirt = false;
@@ -20,6 +23,10 @@ export class Provider extends React.Component {
   subscribers = {};
 
   values = {};
+
+  static propTypes = {
+    children: PropTypes.element.isRequired,
+  }
 
   setValue = (input, value) => {
     const { name } = input.props;
@@ -35,6 +42,7 @@ export class Provider extends React.Component {
       errors: inputErrors,
       hasErrors: inputErrors && inputErrors.length > 0,
       isDirt: true,
+      value,
     };
     if (this.subscribers[name]) {
       this.subscribers[name].forEach(
@@ -45,6 +53,7 @@ export class Provider extends React.Component {
     input.setState(inputState);
   }
 
+  // DONE
   validateInput = (input, value) => {
     const { validators } = input.props;
     const errors = validators && validators.reduce(
@@ -60,10 +69,13 @@ export class Provider extends React.Component {
     return errors;
   }
 
+  // DONE
   registerInput = (input) => {
-    const { name } = input.props;
+    const { name, value } = input.props;
     if (!this.inputs[name]) {
       this.inputs[name] = input;
+      this.values[name] = value || undefined;
+      this.initialValues[name] = value || undefined;
     }
   }
 
@@ -91,6 +103,7 @@ export class Provider extends React.Component {
     this.updateGlobals();
   }
 
+  // DONE
   subscribe = (component) => {
     const { name } = component.props;
     if (name) {
@@ -105,22 +118,36 @@ export class Provider extends React.Component {
     }
   }
 
-  // TODO: finish reset
+  // DONE
   resetForm = () => {
-    console.log('what!');
-    this.errors = {};
     this.hasErrors = false;
     this.isDirt = false;
-    this.values = {};
-    const inputState = {
-      errors: undefined,
-      hasErrors: false,
-      isDirt: false,
-    };
-    // update inputs
-    // update subscribers
+    Object.keys(this.inputs).forEach(
+      key => this.resetInput(this.inputs[key]),
+    );
+    this.updateGlobals();
   }
 
+  // DONE
+  resetInput = (input) => {
+    const { name } = input.props;
+    this.errors[name] = [];
+    this.values[name] = undefined;
+    const inputState = {
+      errors: [],
+      hasErrors: false,
+      isDirt: false,
+      value: undefined,
+    };
+    if (this.subscribers[name]) {
+      this.subscribers[name].forEach(
+        subscriber => subscriber.setState(inputState),
+      );
+    }
+    input.setState(inputState);
+  }
+
+  // DONE
   updateGlobals() {
     const errorList = Object.keys(this.errors).reduce(
       (list, key) => list.concat(this.errors[key]), [],
@@ -144,6 +171,7 @@ export class Provider extends React.Component {
           inputs: this.inputs,
           registerInput: this.registerInput,
           resetForm: this.resetForm,
+          resetValue: this.resetValue,
           subscribers: this.subscribers,
           subscribe: this.subscribe,
           setValue: this.setValue,

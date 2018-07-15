@@ -10,7 +10,6 @@ class Form extends React.Component {
     const { onSubmit } = this.props;
     const { errors, values, validateInputs } = this.context;
     validateInputs();
-    // TODO: check if form is valid
     if (onSubmit) {
       onSubmit({
         ...event,
