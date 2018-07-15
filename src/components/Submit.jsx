@@ -1,6 +1,7 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { withFormContext } from './Forms';
+import { withFormContext } from './ContextForms';
 
 const Input = styled.input`
   background: ${({ disabled }) => (disabled ? '#AFDBD7' : '#00544C')};
@@ -19,5 +20,13 @@ const Submit = ({ hasErrors, ...props }) => (
     {...props}
   />
 );
+
+Submit.propTypes = {
+  hasErrors: PropTypes.bool,
+};
+
+Submit.defaultProps = {
+  hasErrors: false,
+};
 
 export default withFormContext(Submit);

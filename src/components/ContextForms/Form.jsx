@@ -8,15 +8,10 @@ class Form extends React.Component {
   onSubmit = (event) => {
     event.preventDefault();
     const { onSubmit } = this.props;
-    const { errors, values, validateInputs } = this.context;
+    const { values, hasErrors, validateInputs } = this.context;
     validateInputs();
-    // TODO: check if form is valid
-    if (onSubmit) {
-      onSubmit({
-        ...event,
-        errors,
-        values,
-      });
+    if (!hasErrors && onSubmit) {
+      onSubmit(values);
     }
   }
 
