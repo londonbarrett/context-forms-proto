@@ -1,30 +1,77 @@
-# Linting
+# Context Forms
+
+Context Forms is a library for handling forms easily in an expressive
+way, it uses the most recent React Context API for handling the state of
+the form in a central component.
+
+## Features
+
+- Performant: It just re-renders the input updated, not the entire
+  form.
+- Expressive: You can define validators as an input property.
+- Easy to use: No need to write validations.
+- Flexible: you can use it with any custom component, as far as it is a
+  controlled component.
+- Localizable: You can output localized errors.
+- Lightweight: less than 2Kb.
+
+## Overview
+
+The Context Forms library is composed of 1 component and 2 HOCs:
+
+### Form
+
+This is the main component, you should wrap every form with this
+component. It holds the form context and the central state of the entire
+form. it has one event handler:
+
+- onSubmit: Triggered when you press a submit button, it returns an
+  object with the form values.
+
+### inputForm
+
+With this decorator, you register the input in the form handler and
+inject some extra functionality into the component as props:
+
+- setValue: this is for updating the input value, it will validate the
+  value according to the validators you provide.
+- errors.
+- hasErrors.
+- isDirt.
+- value.
+
+### withFormContext
+
+With this decorator you subscribe to form state updates, it can be to a
+single field, or to the entire form, if the component has no name
+attribute provided, then it is subscribing to the entire form events. It
+also injects the following properties:
+
+- errorList:
+- hasErrors:
+- isDirty:
+
+Depending on the subscription type, it injects input specific data or
+form data.
+
+## Requirements
+
+Context Forms is based on the latest Context API, so you need React .16+
+
+Context Forms only works with controlled components. So all you need is
+that your components expose an onChange handler and a value property, if
+your component is not controlled, then you will need to wrap it on a
+controlled component that expose these 2 props, and you are done.
+
+## How does it work
+
+For working with context forms, you need to:
+
+1. Create a form with the Form component.
+2. Connect your input components with the registerInput decorator.
+3. Connect your error components to the form with the withFormContext
+   decorator.
+
+## Dev reference links
+
 https://groundberry.github.io/development/2017/06/11/create-react-app-linting-all-the-things.html
-
-# TODOS
-
-- We need global subscriptors (DONE).
-- Handle form submit and get form values and errors (DONE).
-- There is a bug on the custom components, it is not updating the
-  context value (DONE).
-- Create Form Actions (Submit, Reset), this could be
-  included in the inputForm decorator (DONE).
-- Finish Reset Form (DONE).
-- Initialize Form (DONE).
-- Clean comps (DONE).
-- Remove linting errors (DONE).
-- Move to independant library (or create lerna repo).
-- setup aria on custom controls.
-- Set up preprcessors and post processoprs (for V2).
-- set up async validation (for V2).
-
-# MISC
-
-- What happens with autosave forms?
-- When autosave, inputs should set by themselves as not dirt when value
-  is saved to server.
-
-# BUGS
-
-- Custom inputs are not setting form as invalid, something is wrong
-  setting values (DONE).

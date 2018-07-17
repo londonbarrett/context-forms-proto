@@ -53,7 +53,6 @@ export class Provider extends React.Component {
     input.setState(inputState);
   }
 
-  // DONE
   validateInput = (input, value) => {
     const { validators } = input.props;
     const errors = validators && validators.reduce(
@@ -69,7 +68,6 @@ export class Provider extends React.Component {
     return errors;
   }
 
-  // DONE
   registerInput = (input) => {
     const { name, value } = input.props;
     if (!this.inputs[name]) {
@@ -103,7 +101,6 @@ export class Provider extends React.Component {
     this.updateGlobals();
   }
 
-  // DONE
   subscribe = (component) => {
     const { name } = component.props;
     if (name) {
@@ -118,7 +115,6 @@ export class Provider extends React.Component {
     }
   }
 
-  // DONE
   resetForm = () => {
     this.hasErrors = false;
     this.isDirt = false;
@@ -128,7 +124,6 @@ export class Provider extends React.Component {
     this.updateGlobals();
   }
 
-  // DONE
   resetInput = (input) => {
     const { name } = input.props;
     this.errors[name] = [];
@@ -147,15 +142,15 @@ export class Provider extends React.Component {
     input.setState(inputState);
   }
 
-  // DONE
   updateGlobals() {
     const errorList = Object.keys(this.errors).reduce(
       (list, key) => list.concat(this.errors[key]), [],
     );
+    this.hasErrors = errorList.length > 0;
     const formState = {
       errors: errorList,
       errorHash: this.errors,
-      hasErrors: errorList.length > 0,
+      hasErrors: this.hasErrors,
       isDirt: this.isDirt,
       values: this.values,
     };
@@ -168,6 +163,7 @@ export class Provider extends React.Component {
       <FormContext.Provider
         value={{
           errors: this.errors,
+          hasErrors: this.hasErrors,
           inputs: this.inputs,
           registerInput: this.registerInput,
           resetForm: this.resetForm,
