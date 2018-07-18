@@ -49,8 +49,8 @@ const Actions = Field.extend`
   text-align: right;
 `;
 
-const onSubmit = (data) => {
-  console.log('submit', data.values);
+const onSubmit = (values) => {
+  console.log('submit', values);
 };
 
 const App = () => (

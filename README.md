@@ -4,6 +4,10 @@ Context Forms is a library for handling forms easily in an expressive
 way, it uses the most recent React Context API for handling the state of
 the form in a central component.
 
+Why not formik? it re renders all the form.
+
+Why not redux forms? too much haha.
+
 ## Features
 
 - Performant: It just re-renders the input updated, not the entire
@@ -75,3 +79,5 @@ For working with context forms, you need to:
 ## Dev reference links
 
 https://groundberry.github.io/development/2017/06/11/create-react-app-linting-all-the-things.html
+
+https://medium.com/@franleplant/react-higher-order-components-in-depth-cf9032ee6c3e
