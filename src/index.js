@@ -4,6 +4,7 @@ import { injectGlobal } from 'styled-components';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
+/* eslint-disable-next-line */
 injectGlobal`
   * {
     box-sizing: border-box;

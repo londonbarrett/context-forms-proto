@@ -1,4 +1,4 @@
-export const isNumber = message => value => (isNaN(value) ? message : false);
+export const isNumber = message => value => (Number.isNaN(Number(value)) ? message : false);
 
 export const lowerThan = limit => message => value => (value < limit ? message : false);
 
