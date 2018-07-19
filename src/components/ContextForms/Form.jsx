@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Provider, Consumer } from './FormContext';
+import { Provider, Consumer } from './Context';
 
 class Form extends React.Component {
   context = {};
@@ -8,8 +8,8 @@ class Form extends React.Component {
   onSubmit = (event) => {
     event.preventDefault();
     const { onSubmit } = this.props;
-    const { values, hasErrors, validateInputs } = this.context;
-    validateInputs();
+    const { values, validateInputs } = this.context;
+    const hasErrors = validateInputs();
     if (!hasErrors && onSubmit) {
       onSubmit(values);
     }

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-const FormContext = React.createContext({
+const Context = React.createContext({
   errors: {},
   subscribers: {},
   values: {},
@@ -84,6 +84,7 @@ export class Provider extends React.Component {
         this.values[name],
       );
       if (inputErrors) {
+        this.hasErrors = true;
         this.errors[name] = inputErrors;
         const inputState = {
           errors: inputErrors,
@@ -99,6 +100,7 @@ export class Provider extends React.Component {
       }
     });
     this.updateGlobals();
+    return this.hasErrors;
   }
 
   subscribe = (component) => {
@@ -160,7 +162,7 @@ export class Provider extends React.Component {
   render() {
     const { children } = this.props;
     return (
-      <FormContext.Provider
+      <Context.Provider
         value={{
           errors: this.errors,
           hasErrors: this.hasErrors,
@@ -176,9 +178,9 @@ export class Provider extends React.Component {
         }}
       >
         {children}
-      </FormContext.Provider>
+      </Context.Provider>
     );
   }
 }
 
-export const { Consumer } = FormContext;
+export const { Consumer } = Context;

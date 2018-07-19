@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Consumer } from './FormContext';
+import { Consumer } from './Context';
 
 const formInput = Component => class FormInput extends React.Component {
   static propTypes = {
