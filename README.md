@@ -1,4 +1,9 @@
-# Context Forms
+# Context Forms Prototype
+
+> Disclaimer! This is a prototype, for fast development purposses it has
+> not tests, it is not typed, and some components still need some work.
+> Now the Proof of Concept has passed and a production version is on
+> progress.
 
 Context Forms is a library for handling forms easily in an expressive
 way, it uses the most recent React Context API for handling the state of
