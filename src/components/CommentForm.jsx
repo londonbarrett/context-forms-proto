@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Form, validators } from './ContextForms';
 import TextfieldInput from './inputs/TextfieldInput';
@@ -38,6 +39,13 @@ class CommentForm extends React.Component {
   }
 
   render() {
+    const {
+      firstName,
+      lastName,
+      age,
+      accept,
+      rating,
+    } = this.props;
     return (
       <StyledForm
         onSubmit={this.handleOnSubmit}
@@ -53,7 +61,7 @@ class CommentForm extends React.Component {
             validators={[
               validators.isNotEmpty('First Name should not be empty'),
             ]}
-            value="Andrepota"
+            value={firstName}
           />
           <FieldError name="firstName" />
         </Field>
@@ -64,6 +72,7 @@ class CommentForm extends React.Component {
           <TextfieldInput
             id="lastName"
             name="lastName"
+            value={lastName}
           />
         </Field>
         <Field>
@@ -78,6 +87,7 @@ class CommentForm extends React.Component {
               validators.isNumber('Age should be a number'),
               validators.greaterThan(150)('Age should be under 150'),
             ]}
+            value={age}
           />
           <FieldError name="age" />
         </Field>
@@ -92,7 +102,7 @@ class CommentForm extends React.Component {
             validators={[
               validators.isRequired('Terms & Conditions must be accepted'),
             ]}
-            value
+            value={accept}
           />
           <FieldError name="accept" />
         </Field>
@@ -106,7 +116,7 @@ class CommentForm extends React.Component {
             validators={[
               validators.isRequired('Rating field is required'),
             ]}
-            value={3}
+            value={rating}
           />
         </Field>
         <FormErrors />
@@ -118,5 +128,21 @@ class CommentForm extends React.Component {
     );
   }
 }
+
+CommentForm.propTypes = {
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
+  age: PropTypes.number,
+  accept: PropTypes.bool,
+  rating: PropTypes.number,
+};
+
+CommentForm.defaultProps = {
+  firstName: undefined,
+  lastName: undefined,
+  age: undefined,
+  accept: undefined,
+  rating: undefined,
+};
 
 export default CommentForm;

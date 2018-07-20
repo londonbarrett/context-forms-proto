@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders correctly 1`] = `
+<Styled(Form)
+  name="commentForm"
+  onSubmit={[Function]}
+>
+  <styled.div>
+    <styled.label
+      htmlFor="firstName"
+    >
+      First Name
+    </styled.label>
+    <FormInput
+      id="firstName"
+      name="firstName"
+      validators={
+        Array [
+          [Function],
+        ]
+      }
+    />
+    <Wrapper
+      name="firstName"
+    />
+  </styled.div>
+  <styled.div>
+    <styled.label
+      htmlFor="lastName"
+    >
+      Last Name
+    </styled.label>
+    <FormInput
+      id="lastName"
+      name="lastName"
+    />
+  </styled.div>
+  <styled.div>
+    <styled.label
+      htmlFor="age"
+    >
+      Age
+    </styled.label>
+    <FormInput
+      id="age"
+      name="age"
+      validators={
+        Array [
+          [Function],
+          [Function],
+          [Function],
+        ]
+      }
+    />
+    <Wrapper
+      name="age"
+    />
+  </styled.div>
+  <styled.div>
+    <styled.label
+      htmlFor="accept"
+    >
+      Terms & Conditions
+    </styled.label>
+    <FormInput
+      id="accept"
+      label="Do you accept terms and contidions"
+      name="accept"
+      validators={
+        Array [
+          [Function],
+        ]
+      }
+    />
+    <Wrapper
+      name="accept"
+    />
+  </styled.div>
+  <styled.div>
+    <styled.label
+      htmlFor="rating"
+    >
+      Rating
+    </styled.label>
+    <FormInput
+      id="rating"
+      name="rating"
+      validators={
+        Array [
+          [Function],
+        ]
+      }
+    />
+  </styled.div>
+  <Wrapper />
+  <styled.div>
+    <Reset />
+    <Wrapper
+      value="Send"
+    />
+  </styled.div>
+</Styled(Form)>
+`;

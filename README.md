@@ -86,3 +86,5 @@ For working with context forms, you need to:
 https://groundberry.github.io/development/2017/06/11/create-react-app-linting-all-the-things.html
 
 https://medium.com/@franleplant/react-higher-order-components-in-depth-cf9032ee6c3e
+
+https://www.leighhalliday.com/testing-react-jest-enzyme-sinon
