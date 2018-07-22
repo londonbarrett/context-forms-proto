@@ -32,109 +32,100 @@ const Actions = Field.extend`
   text-align: right;
 `;
 
-class CommentForm extends React.Component {
-  handleOnSubmit = (values) => {
-    /* eslint-disable-next-line */
-    console.log(values);
-  }
-
-  render() {
-    const {
-      firstName,
-      lastName,
-      age,
-      accept,
-      rating,
-    } = this.props;
-    return (
-      <StyledForm
-        onSubmit={this.handleOnSubmit}
-        name="commentForm"
-      >
-        <Field>
-          <Label htmlFor="firstName">
-            First Name
-          </Label>
-          <TextfieldInput
-            id="firstName"
-            name="firstName"
-            validators={[
-              validators.isNotEmpty('First Name should not be empty'),
-            ]}
-            value={firstName}
-          />
-          <FieldError name="firstName" />
-        </Field>
-        <Field>
-          <Label htmlFor="lastName">
-            Last Name
-          </Label>
-          <TextfieldInput
-            id="lastName"
-            name="lastName"
-            value={lastName}
-          />
-        </Field>
-        <Field>
-          <Label htmlFor="age">
-            Age
-          </Label>
-          <TextfieldInput
-            id="age"
-            name="age"
-            validators={[
-              validators.isNotEmpty('Age should not be empty'),
-              validators.isNumber('Age should be a number'),
-              validators.greaterThan(150)('Age should be under 150'),
-            ]}
-            value={age}
-          />
-          <FieldError name="age" />
-        </Field>
-        <Field>
-          <Label htmlFor="accept">
-            Terms & Conditions
-          </Label>
-          <CheckboxInput
-            id="accept"
-            label="Do you accept terms and contidions"
-            name="accept"
-            validators={[
-              validators.isRequired('Terms & Conditions must be accepted'),
-            ]}
-            value={accept}
-          />
-          <FieldError name="accept" />
-        </Field>
-        <Field>
-          <Label htmlFor="rating">
-            Rating
-          </Label>
-          <RatingInput
-            id="rating"
-            name="rating"
-            validators={[
-              validators.isRequired('Rating field is required'),
-            ]}
-            value={rating}
-          />
-        </Field>
-        <FormErrors />
-        <Actions>
-          <Reset />
-          <Submit value="Send" />
-        </Actions>
-      </StyledForm>
-    );
-  }
-}
+const CommentForm = ({
+  firstName,
+  lastName,
+  age,
+  accept,
+  rating,
+  onSubmit,
+}) => (
+  <StyledForm
+    onSubmit={onSubmit}
+  >
+    <Field>
+      <Label htmlFor="firstName">
+        First Name
+      </Label>
+      <TextfieldInput
+        id="firstName"
+        name="firstName"
+        validators={[
+          validators.isNotEmpty('First Name should not be empty'),
+        ]}
+        value={firstName}
+      />
+      <FieldError name="firstName" />
+    </Field>
+    <Field>
+      <Label htmlFor="lastName">
+        Last Name
+      </Label>
+      <TextfieldInput
+        id="lastName"
+        name="lastName"
+        value={lastName}
+      />
+    </Field>
+    <Field>
+      <Label htmlFor="age">
+        Age
+      </Label>
+      <TextfieldInput
+        id="age"
+        name="age"
+        validators={[
+          validators.isNotEmpty('Age should not be empty'),
+          validators.isNumber('Age should be a number'),
+          validators.greaterThan(150)('Age should be under 150'),
+        ]}
+        value={age}
+      />
+      <FieldError name="age" />
+    </Field>
+    <Field>
+      <Label htmlFor="accept">
+        Terms & Conditions
+      </Label>
+      <CheckboxInput
+        id="accept"
+        label="Do you accept terms and contidions"
+        name="accept"
+        validators={[
+          validators.isRequired('Terms & Conditions must be accepted'),
+        ]}
+        value={accept}
+      />
+      <FieldError name="accept" />
+    </Field>
+    <Field>
+      <Label htmlFor="rating">
+        Rating
+      </Label>
+      <RatingInput
+        id="rating"
+        name="rating"
+        validators={[
+          validators.isRequired('Rating field is required'),
+        ]}
+        value={rating}
+      />
+    </Field>
+    <FormErrors />
+    <Actions>
+      <Reset />
+      <Submit value="Send" />
+    </Actions>
+  </StyledForm>
+);
 
 CommentForm.propTypes = {
   firstName: PropTypes.string,
   lastName: PropTypes.string,
-  age: PropTypes.number,
+  age: PropTypes.string,
   accept: PropTypes.bool,
   rating: PropTypes.number,
+  onSubmit: PropTypes.func,
 };
 
 CommentForm.defaultProps = {
@@ -143,6 +134,7 @@ CommentForm.defaultProps = {
   age: undefined,
   accept: undefined,
   rating: undefined,
+  onSubmit: undefined,
 };
 
 export default CommentForm;
