@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders correctly 1`] = `
+<div>
+  <h2>
+    Form Errors
+  </h2>
+  <ul
+    class="sc-bdVaJa iwCcLp"
+  >
+    <li
+      class="sc-bwzfXH eUFeNI"
+    >
+      error 1
+    </li>
+    <li
+      class="sc-bwzfXH eUFeNI"
+    >
+      error 2
+    </li>
+    <li
+      class="sc-bwzfXH eUFeNI"
+    >
+      error 3
+    </li>
+  </ul>
+</div>
+`;

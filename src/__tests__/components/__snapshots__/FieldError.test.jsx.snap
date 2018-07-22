@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders correctly 1`] = `
+<ul
+  class="sc-bdVaJa iwCcLp"
+>
+  <li
+    class="sc-bwzfXH eUFeNI"
+  >
+    Error 1
+  </li>
+  <li
+    class="sc-bwzfXH eUFeNI"
+  >
+    Error 2
+  </li>
+  <li
+    class="sc-bwzfXH eUFeNI"
+  >
+    Error 3
+  </li>
+</ul>
+`;
