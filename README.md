@@ -64,7 +64,7 @@ form data.
 
 ## Requirements
 
-Context Forms is based on the latest Context API, so you need React .16+
+Context Forms is based on the latest Context API, so you need React 16+
 
 Context Forms only works with controlled components. So all you need is
 that your components expose an onChange handler and a value property, if
@@ -79,6 +79,11 @@ For working with context forms, you need to:
 2. Connect your input components with the registerInput decorator.
 3. Connect your error components to the form with the withFormContext
    decorator.
+
+## What is Missing
+
+- submit form method
+- setting form values
 
 ## Dev reference links
 
