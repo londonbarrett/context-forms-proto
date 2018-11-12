@@ -10,6 +10,7 @@ import SelectInput from './inputs/SelectInput';
 import Reset from './Reset';
 import Submit from './Submit';
 import FormErrors from './FormErrors';
+import TextfieldInputII from './inputs/TextfieldInputII';
 
 const StyledForm = styled(Form)`
   margin: 4rem auto;
@@ -140,6 +141,17 @@ class CommentForm extends React.PureComponent {
               validators.isRequired('Rating field is required'),
             ]}
             value={rating}
+          />
+        </Field>
+        <Field>
+          <Label htmlFor="rating">
+            Nick
+          </Label>
+          <TextfieldInputII
+            id="nick"
+            name="nick"
+            value="holaa"
+            onChange={event => console.log('buena!!!', event.target.value)}
           />
         </Field>
         <FormErrors />

@@ -20,6 +20,10 @@ class Form extends React.Component {
     resetForm();
   }
 
+  onChange = context => (event) => {
+    console.log('FORM CHANGE', context, event.target);
+  }
+
   render() {
     const { children, className, name } = this.props;
     return (
@@ -29,10 +33,11 @@ class Form extends React.Component {
             this.context = context;
             return (
               <form
-                onSubmit={this.onSubmit}
-                onReset={this.onReset}
                 className={className}
                 name={name}
+                onChange={this.onChange(context)}
+                onReset={this.onReset}
+                onSubmit={this.onSubmit}
               >
                 {children}
               </form>

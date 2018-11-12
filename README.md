@@ -23,6 +23,18 @@ Why not redux forms? too much haha.
 - Localizable: You can output localized errors.
 - Lightweight: less than 2Kb.
 
+## Nice to Have
+
+- Initial values.
+- Sequential forms.
+- Multi step forms.
+- Inject all form values in on change, or a reference to the state of
+  the form
+- Access form values from outside. Form onChange.
+- Manipulate form from outside.
+- HOF functions for manipulating the form, i.e. to update values on the form
+- Inject with the hocs form manipulation functions
+
 ## Overview
 
 The Context Forms library is composed of 1 component and 2 HOCs:
@@ -84,6 +96,10 @@ For working with context forms, you need to:
 
 - submit form method
 - setting form values
+
+## New Paradigm
+
+- New state manager.
 
 ## Dev reference links
 

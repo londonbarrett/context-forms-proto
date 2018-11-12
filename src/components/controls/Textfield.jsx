@@ -13,34 +13,24 @@ const Input = styled.input`
   width: 100%;
 `;
 
-class Textfield extends React.Component {
-  handleOnChange = (event) => {
-    const { onChange } = this.props;
-    onChange(event);
-  }
-
+class Textfield extends React.PureComponent {
   render() {
     return (
       <Input
         {...this.props}
         type="text"
-        onChange={this.handleOnChange}
       />
     );
   }
 }
 
 Textfield.propTypes = {
-  hasErrors: PropTypes.bool,
   name: PropTypes.string.isRequired,
-  onChange: PropTypes.func,
   value: PropTypes.string,
 };
 
 Textfield.defaultProps = {
-  hasErrors: false,
-  onChange: undefined,
-  value: '',
+  value: undefined,
 };
 
 export default Textfield;

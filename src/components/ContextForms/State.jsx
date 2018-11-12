@@ -15,6 +15,8 @@ class ContextValue {
 
   values = {};
 
+  iiValues = {};
+
   setValue = (input, value) => {
     const { name } = input.props;
     const inputErrors = this.validateInput(input, value);
@@ -145,6 +147,15 @@ class ContextValue {
     };
     this.globals.forEach(subscriber => subscriber.setState(formState));
   }
+
+  iiHandleChange = component => (event) => {
+    console.log('State.iiHAndleChange', component.props, event.target.value);
+    this.iiValues[component.props.name] = event.target.value;
+    const { onChange } = component.props;
+    onChange(event);
+  }
+
+  iiGetValue = field => this.iiValues[field]
 }
 
 export default ContextValue;

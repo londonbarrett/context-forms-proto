@@ -5,11 +5,9 @@ import { formInput } from '../ContextForms';
 
 class SelectInput extends React.Component {
   changeHandler = (event) => {
-    const { setValue } = this.props;
-    // const { setValue, onChange } = this.props;
+    const { setValue, onChange } = this.props;
     setValue(event.target.value);
-    console.log('SELECT_INPUT', this.onChange);
-    // onChange(event);
+    onChange(event);
   }
 
   render() {
