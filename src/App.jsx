@@ -1,6 +1,7 @@
 import React from 'react';
 import AppHeader from './components/AppHeader';
 import CommentForm from './components/CommentForm';
+import UserForm from './components/UserForm';
 
 const handleOnSubmit = (values) => {
   console.log(values);
@@ -18,6 +19,7 @@ const App = () => (
         rating={5}
         onSubmit={handleOnSubmit}
       />
+      <UserForm />
     </section>
   </main>
 );

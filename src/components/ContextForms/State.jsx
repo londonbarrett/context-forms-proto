@@ -1,4 +1,4 @@
-class ContextValue {
+class State {
   errors = {};
 
   hasErrors = false;
@@ -147,4 +147,4 @@ class ContextValue {
   }
 }
 
-export default ContextValue;
+export default State;

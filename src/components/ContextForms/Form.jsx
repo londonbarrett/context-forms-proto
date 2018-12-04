@@ -5,7 +5,7 @@ import { Provider, Consumer } from './Context';
 class Form extends React.Component {
   context = {};
 
-  onSubmit = (event) => {
+  handleSubmit = (event) => {
     event.preventDefault();
     const { onSubmit } = this.props;
     const { values, validateInputs } = this.context;
@@ -15,10 +15,12 @@ class Form extends React.Component {
     }
   }
 
-  onReset = () => {
+  handleReset = () => {
     const { resetForm } = this.context;
     resetForm();
   }
+
+  handleChange = event => console.log('Form::handleChange', event.target.value, this.context);
 
   render() {
     const { children, className, name } = this.props;
@@ -29,8 +31,9 @@ class Form extends React.Component {
             this.context = context;
             return (
               <form
-                onSubmit={this.onSubmit}
-                onReset={this.onReset}
+                onChange={this.handleChange}
+                onReset={this.handleReset}
+                onSubmit={this.handleSubmit}
                 className={className}
                 name={name}
               >
@@ -45,7 +48,9 @@ class Form extends React.Component {
 }
 
 Form.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element).isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.element), PropTypes.element,
+  ]).isRequired,
   className: PropTypes.string,
   name: PropTypes.string,
   onSubmit: PropTypes.func,

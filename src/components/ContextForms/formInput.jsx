@@ -1,26 +1,40 @@
+import { get } from 'lodash';
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Consumer } from './Context';
 
-const formInput = Component => class FormInput extends React.Component {
+const formInput = (
+  { valuePath = 'target.value' } = {},
+) => Component => class FormInput extends React.Component {
+  context = {};
+
   static propTypes = {
     name: PropTypes.string.isRequired,
-  }
+    onChange: PropTypes.func,
+  };
 
-  state = {}
+  static defaultProps = {
+    onChange: undefined,
+  };
 
-  setValue = context => value => context.setValue(this, value)
+  state = {};
+
+  handleChange = (event) => {
+    const { setValue } = this.context;
+    const { onChange } = this.props;
+    const value = get(event, valuePath, event);
+    setValue(this, value);
+    if (onChange) onChange(event);
+  };
 
   render() {
-    const { name } = this.props;
     const {
-      errors,
-      hasErrors,
-      isDirt,
+      errors, hasErrors, isDirt, value,
     } = this.state;
     return (
       <Consumer>
-        { (context) => {
+        {(context) => {
+          this.context = context;
           context.registerInput(this);
           return (
             <Component
@@ -28,8 +42,8 @@ const formInput = Component => class FormInput extends React.Component {
               errors={errors}
               hasErrors={hasErrors}
               isDirt={isDirt}
-              setValue={this.setValue(context)}
-              value={context.values[name]}
+              value={value}
+              onChange={this.handleChange}
             />
           );
         }}

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import State from './State';
 
 const state = new State();
-const Context = React.createContext(state);
+const Context = React.createContext({});
 
 const Provider = ({ children }) => (
   <Context.Provider value={state}>
