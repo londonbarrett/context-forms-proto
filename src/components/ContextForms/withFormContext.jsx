@@ -1,9 +1,11 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Consumer } from './Context';
+import { Context } from './Context';
 
 const withFormContext = (Component) => {
   class Wrapper extends React.Component {
+    static contextType = Context;
+
     state = {};
 
     render() {
@@ -11,23 +13,18 @@ const withFormContext = (Component) => {
         errors,
         hasErrors,
       } = this.state;
+      const { resetForm } = this.context;
       return (
-        <Consumer>
-          { (context) => {
-            context.subscribe(this);
-            return (
-              <Component
-                errors={errors}
-                hasErrors={hasErrors}
-                resetForm={context.resetForm}
-                {...this.props}
-              />
-            );
-          }}
-        </Consumer>
+        <Component
+          errors={errors}
+          hasErrors={hasErrors}
+          resetForm={resetForm}
+          {...this.props}
+        />
       );
     }
   }
+
   Wrapper.propTypes = {
     name: PropTypes.string,
   };

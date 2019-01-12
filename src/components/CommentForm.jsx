@@ -35,8 +35,13 @@ const Actions = Field.extend`
 
 class CommentForm extends React.PureComponent {
   handleRegionChange = (event) => {
-    console.log('COMMENT_FORM', event.target.value);
+    event.context.setValue('age', event.value);
   }
+
+  handleAgeChange = (event) => {
+    const firstName = event.context.getValue('firstName');
+    event.context.setValue('firstName', `${firstName} ${event.value}`);
+  };
 
   render() {
     const {
@@ -45,10 +50,12 @@ class CommentForm extends React.PureComponent {
       age,
       accept,
       rating,
+      region,
       onSubmit,
     } = this.props;
     return (
       <StyledForm
+        name="comment"
         onSubmit={onSubmit}
       >
         <Field>
@@ -82,6 +89,7 @@ class CommentForm extends React.PureComponent {
           <TextfieldInput
             id="age"
             name="age"
+            onChange={this.handleAgeChange}
             validators={[
               validators.isNotEmpty('Age should not be empty'),
               validators.isNumber('Age should be a number'),
@@ -123,10 +131,11 @@ class CommentForm extends React.PureComponent {
               },
               {
                 label: 'Europe',
-                value: 3,
+                value: 356,
               },
             ]}
             onChange={this.handleRegionChange}
+            value={region}
           />
         </Field>
         <Field>
@@ -158,6 +167,7 @@ CommentForm.propTypes = {
   age: PropTypes.string,
   accept: PropTypes.bool,
   rating: PropTypes.number,
+  region: PropTypes.string,
   onSubmit: PropTypes.func,
 };
 
@@ -167,6 +177,7 @@ CommentForm.defaultProps = {
   age: undefined,
   accept: undefined,
   rating: undefined,
+  region: undefined,
   onSubmit: undefined,
 };
 

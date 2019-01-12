@@ -1,12 +1,12 @@
 import { get } from 'lodash';
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Consumer } from './Context';
+import { Context } from './Context';
 
 const formInput = (
   { valuePath = 'target.value' } = {},
 ) => Component => class FormInput extends React.Component {
-  context = {};
+  static contextType = Context;
 
   static propTypes = {
     name: PropTypes.string.isRequired,
@@ -19,12 +19,28 @@ const formInput = (
 
   state = {};
 
+  componentDidMount = () => {
+    // TODO: check unmount case
+    const { registerInput } = this.context;
+    registerInput(this);
+  }
+
+  setInputState = (state) => {
+    this.setState({ ...state });
+  }
+
   handleChange = (event) => {
     const { setValue } = this.context;
-    const { onChange } = this.props;
+    const { name, onChange } = this.props;
     const value = get(event, valuePath, event);
-    setValue(this, value);
-    if (onChange) onChange(event);
+    setValue(name, value);
+    if (onChange) {
+      onChange({
+        context: this.context,
+        name,
+        value,
+      });
+    }
   };
 
   render() {
@@ -32,22 +48,14 @@ const formInput = (
       errors, hasErrors, isDirt, value,
     } = this.state;
     return (
-      <Consumer>
-        {(context) => {
-          this.context = context;
-          context.registerInput(this);
-          return (
-            <Component
-              {...this.props}
-              errors={errors}
-              hasErrors={hasErrors}
-              isDirt={isDirt}
-              value={value}
-              onChange={this.handleChange}
-            />
-          );
-        }}
-      </Consumer>
+      <Component
+        {...this.props}
+        errors={errors}
+        hasErrors={hasErrors}
+        isDirt={isDirt}
+        value={value}
+        onChange={this.handleChange}
+      />
     );
   }
 };

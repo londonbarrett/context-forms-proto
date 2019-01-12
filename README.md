@@ -1,5 +1,18 @@
 # Context Forms Prototype
 
+## TODOS
+
+- [X] Change another field value.
+- [X] Multiple forms.
+- [X] Initial values.
+- [] Reinitialize values.
+- [] Form errors.
+- [] Define API.
+- [] Define metadata.
+- [] Define complex cases.
+- [] Build a complex case example.
+- [] Multi step form.
+
 > Disclaimer! This is a prototype, for fast development purposses it is
 > not typed, and some components still need some work. Now the Proof of
 > Concept has passed and a production version is on progress.

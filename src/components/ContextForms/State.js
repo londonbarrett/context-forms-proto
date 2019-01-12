@@ -15,15 +15,16 @@ class State {
 
   values = {};
 
-  setValue = (input, value) => {
-    const { name } = input.props;
-    const inputErrors = this.validateInput(input, value);
+  setValue = (name, value) => {
+    if (!this.inputs[name]) throw new Error('Fuck, input not registered');
+    const input = this.inputs[name];
+    this.values[name] = value;
+    const inputErrors = this.validateInput(name, value);
     if (inputErrors && inputErrors.length) {
       this.errors[name] = inputErrors;
     } else {
       delete this.errors[name];
     }
-    this.values[name] = value;
     this.isDirt = true;
     const inputState = {
       errors: inputErrors,
@@ -37,10 +38,23 @@ class State {
       );
     }
     this.updateGlobals();
-    input.setState(inputState);
+    input.setInputState(inputState);
   }
 
-  validateInput = (input, value) => {
+  setInitialValue = (name, value) => {
+    const input = this.inputs[name];
+    this.values[name] = value;
+    this.initialValues[name] = value;
+    const inputState = { value };
+    input.setInputState(inputState);
+  }
+
+  getValue = name => this.values[name];
+
+  validateInput = (name, value) => {
+    // TODO: Check for undefined inputs
+    // if (!this.inputs[field]) return undefined;
+    const input = this.inputs[name];
     const { validators } = input.props;
     const errors = validators && validators.reduce(
       (acc, validator) => {
@@ -59,15 +73,14 @@ class State {
     const { name, value } = input.props;
     if (!this.inputs[name]) {
       this.inputs[name] = input;
-      this.values[name] = value || undefined;
-      this.initialValues[name] = value || undefined;
+      this.setInitialValue(name, value);
     }
   }
 
   validateInputs = () => {
     Object.keys(this.inputs).forEach((name) => {
       const inputErrors = this.validateInput(
-        this.inputs[name],
+        name,
         this.values[name],
       );
       if (inputErrors) {
@@ -116,12 +129,12 @@ class State {
   resetInput = (input) => {
     const { name } = input.props;
     this.errors[name] = [];
-    this.values[name] = undefined;
+    this.values[name] = this.initialValues[name];
     const inputState = {
       errors: [],
       hasErrors: false,
       isDirt: false,
-      value: undefined,
+      value: this.values[name],
     };
     if (this.subscribers[name]) {
       this.subscribers[name].forEach(
@@ -131,7 +144,7 @@ class State {
     input.setState(inputState);
   }
 
-  updateGlobals() {
+  updateGlobals = () => {
     const errorList = Object.keys(this.errors).reduce(
       (list, key) => list.concat(this.errors[key]), [],
     );

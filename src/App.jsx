@@ -1,7 +1,7 @@
 import React from 'react';
 import AppHeader from './components/AppHeader';
 import CommentForm from './components/CommentForm';
-import UserForm from './components/UserForm';
+// import UserForm from './components/UserForm';
 
 const handleOnSubmit = (values) => {
   console.log(values);
@@ -14,12 +14,13 @@ const App = () => (
       <CommentForm
         firstName="Joe"
         lastName="Strummer"
-        age="66"
+        age="666"
         accept
-        rating={5}
+        rating={4}
+        region="2"
         onSubmit={handleOnSubmit}
       />
-      <UserForm />
+      {/* <UserForm /> */}
     </section>
   </main>
 );
