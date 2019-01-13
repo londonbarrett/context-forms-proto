@@ -5,13 +5,14 @@
 - [X] Change another field value.
 - [X] Multiple forms.
 - [X] Initial values.
-- [] Reinitialize values.
-- [] Form errors.
-- [] Define API.
-- [] Define metadata.
-- [] Define complex cases.
-- [] Build a complex case example.
-- [] Multi step form.
+- [ ] Form errors.
+- [ ] Reinitialize values.
+- [ ] Define metadata.
+- [ ] Define API.
+- [ ] Define complex cases.
+- [ ] Build a complex case example.
+- [ ] Multi step form.
+- [ ] Async validation.
 
 > Disclaimer! This is a prototype, for fast development purposses it is
 > not typed, and some components still need some work. Now the Proof of
